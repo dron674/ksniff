@@ -33,7 +33,7 @@ func (d ContainerdBridge) GetDefaultSocketPath() string {
 func (d *ContainerdBridge) BuildTcpdumpCommand(containerId *string, netInterface string, filter string, pid *string, socketPath string) []string {
 	d.tcpdumpContainerName = "ksniff-container-" + utils.GenerateRandomString(8)
 	d.socketPath = socketPath
-	imageName := "docker.io/maintained/tcpdump:latest"
+	imageName := "docker-hub.binary.alfabank.ru/maintained/tcpdump:latest"
 	tcpdumpCommand := fmt.Sprintf("tcpdump -i %s -U -w - %s", netInterface, filter)
 	shellScript := fmt.Sprintf(`
     set -ex
@@ -62,5 +62,5 @@ func (d *ContainerdBridge) BuildCleanupCommand() []string {
 }
 
 func (d ContainerdBridge) GetDefaultImage() string {
-	return "docker.io/hamravesh/ksniff-helper:v3"
+	return "docker-hub.binary.alfabank.ru/hamravesh/ksniff-helper:v3"
 }
